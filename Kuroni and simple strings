@@ -1,0 +1,43 @@
+// Codeforces 1305B
+// Sanghita Chakraborty
+//tags: Constructive algorithm, greedy, strings, two pointers
+// rating :1200
+
+
+
+
+ #include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define pb push_back
+#define ppb pop_back
+
+
+int main() {
+	string s; cin>>s; int ii=0;
+	vector<int> f,b;
+	for(char c:s) {
+		if(c=='(') f.pb(ii);
+		else b.pb(ii);
+		ii++;
+	}
+  int cnt =0; set<int> p;
+	for(int j:f) {
+		if(!b.empty() && j<b.back()) {
+			p.insert(j);
+			p.insert(b.back());
+			cnt+=2;
+			b.ppb();
+		}
+	}
+	if (cnt==0) 
+	 cout<<0<<endl;
+	else {
+		cout<<1<<endl;
+		cout<<cnt<<endl;
+		for(int j: p)
+			cout<<j+1<<" ";
+		cout<<endl;
+	}
+	
+}
