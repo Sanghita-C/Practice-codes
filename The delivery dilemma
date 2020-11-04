@@ -1,0 +1,52 @@
+//CF Round 681 -C
+
+
+#include <bits/stdc++.h>
+using namespace std;
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define ll long long
+#define pb push_back
+#define ppb pop_back
+#define cib cin.ignore(numeric_limits<streamsize>::max(), '\n')
+
+
+int main(){
+ int t; cin>>t;
+ while(t--){
+    int n; cin>>n;
+    ll a[n];
+    ll b[n];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+    ll sum=0;
+    for(int i=0;i<n;i++){
+        cin>>b[i];
+        sum+=b[i];
+    }
+    vector<pair<ll,ll>>v;
+    for(int i=0;i<n;i++){
+        pair<ll,ll>p;
+        p.first=a[i];
+        p.second=b[i];
+        v.pb(p);
+    }
+    sort(v.begin(),v.end());
+    for(int i=1;i<n;i++){
+        v[i].second+=v[i-1].second;
+    }
+    ll ans= 1000000000;
+    for(int i=0;i<n;i++){
+        v[i].second=sum-v[i].second;
+        ll a1;
+        if(v[i].second>=v[i].first)
+            a1=v[i].second;
+        else
+            a1=v[i].first;
+        if(a1<ans)ans=a1;
+    }
+    if(sum<ans) cout<<sum<<endl;
+    else cout<<ans<<endl;
+ }
+
+}
